@@ -7,11 +7,11 @@ import down from './down.png';
 import left from './left.png';
 import right from './right.png';
 import ExperienceSection from "./ExperienceSection";
-import BasicNavbar from "./BasicNavbar";
 
 
 const socket = io('http://localhost:8000');
 
+//dictionary to change which arrow key image is showing
 const arrowImages = { 
   up: up,
   down: down,
@@ -20,7 +20,9 @@ const arrowImages = {
 };
 
 function App() {
-  const [temp, setTemp] = useState('75');
+  
+  //use state variables
+  const [temp, setTemp] = useState(null);
   const [ultrasonic, setUltrasonic] = useState(null);
   const [humidity, setHumidity] = useState(null);
   const [movement, setMovement] = useState("Idle");
@@ -59,6 +61,7 @@ function App() {
       if (isKeyDown) return; 
       setIsKeyDown(true);
 
+      //For use on which direction is showing on website, and what message we send to the broker
       let newMovement = "";
       let message = "";
 
@@ -101,6 +104,7 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
+    //isKeyDown in dependancy array 
   }, [isKeyDown]);
 
 
@@ -118,17 +122,16 @@ function App() {
 
   const submitDegree = () => {
     if (degree) {
-      console.log(`Submitting degree: ${degree}`); // Debugging line
-      socket.emit('send-arm-degree', degree); // Emit the degree angle to the server
+      console.log(`Submitting degree: ${degree}`); 
+      socket.emit('send-arm-degree', degree); //send degree angle to broker
       setShowDegreeInput(false);
-      setDegree(""); // Clear the input field
+      setDegree(""); //clear input field
     }
   };
 
   return (
     
     <div className="App">
-      {/* <BasicNavbar /> */}
       <img src={logo} alt="Logo" className="logo" />
       <p>The Dogwalkers Rover Mission</p>
       <h1 className="temp">Live Camera Feed</h1>
