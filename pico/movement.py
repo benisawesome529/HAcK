@@ -19,6 +19,9 @@ EN_B=Pin(2,Pin.OUT)
 EN_A.high()
 EN_B.high()
 # Forward
+
+
+
 def move_forward():
     In1.high()
     In2.low()
@@ -28,7 +31,8 @@ def move_forward():
     In6.low()
     In7.high()
     In8.low()
-    print("calling Forward")
+    
+    
 
     
 # Backward
@@ -66,14 +70,15 @@ def turn_left():
    
 #Stop
 def stop():
-    In1.low()
-    In2.low()
-    In3.low()
-    In4.low()
-    In5.low()
-    In6.low()
-    In7.low()
-    In8.low()
+    In1.value(0)
+    In2.value(0)
+    In3.value(0)
+    In4.value(0)
+    In5.value(0)
+    In6.value(0)
+    In7.value(0)
+    In8.value(0)
+
     
 
 In5=Pin(19,Pin.OUT) 
@@ -90,19 +95,4 @@ EN_D=Pin(12,Pin.OUT)
 EN_C.high()
 EN_D.high()
 # Forward
-try:      
-    while True:
-        move_forward()
-        print("Forward")
-        time.sleep(2)
-        stop()
-        print("Stop")
-        time.sleep(2)
-        move_backward()
-        print("Backward")   
-        time.sleep(2)
-        stop()
-        print("Stop")
-        time.sleep(2)
-finally:
-    stop()
+#
